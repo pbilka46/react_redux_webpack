@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
@@ -35,5 +36,16 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: true,
+  },
+  resolve: {
+    alias: {
+      theme: path.resolve(__dirname, './src/components/theme/index.js'),
+    }
+  },
+  // alias: {
+  //   theme: path.resolve(__dirname, "src/themes/newTheme.js"),
+  // },
   plugins: [htmlWebpackPlugin]
 };

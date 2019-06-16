@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
-import basic from './basicReducer';
+import basic from './createReducer';
+import createObject from './createObject';
 
 export default combineReducers({
-  basic
+  account: createObject('user')
 });

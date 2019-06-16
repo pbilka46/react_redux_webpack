@@ -3,6 +3,7 @@ export const GREEN = '#89b0ae';
 export const LIGHT_GREEN = '#bee3db';
 export const CREAM = '#faf9f9';
 export const CREAMY_PEACH = '#ffd6ba';
+export const DARK_BLUE = '#242c39';
 
 
 
