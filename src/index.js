@@ -7,14 +7,14 @@ import appState from './store';
 import App from './components/App';
 import Echo from 'laravel-echo';
 
-window.Pusher = require('pusher-js');
+
+window.io = require('socket.io-client');
 
 window.Echo = new Echo({
-  broadcaster: 'pusher',
-  key: '9e1c438b81f8b5911b2a',
-  cluster: 'eu',
-  encrypted: true
+  broadcaster: 'socket.io',
+  host: window.location.hostname + ':6001'
 });
+
 
 ReactDOM.render(
   <Provider store={appState.store}>

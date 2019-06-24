@@ -27,7 +27,7 @@ const LoginForm = (props) => {
   
   const handleLogin = (values) => {
     props.loginAction(values).then(
-      () => props.history.push('/account'),
+      () => props.history.push('/group'),
       () => setMessage('Wrong credentials.')
     )
   };

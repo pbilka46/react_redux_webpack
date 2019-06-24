@@ -28,7 +28,7 @@ const FormComponent = (props) => {
   return (
     <ViewWrapper>
       <Heading
-        variant="h1"
+        tag="h1"
       >{props.title}</Heading>
       <Formik
         initialValues={props.initialValues}

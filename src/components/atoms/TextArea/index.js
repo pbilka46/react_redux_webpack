@@ -11,6 +11,7 @@ const buttonTypes = {
 
 const Input = styled.input`
   ${textBase};
+  resize: none;
   background: transparent;
   outline: none;
   cursor: pointer;

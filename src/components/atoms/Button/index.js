@@ -16,13 +16,19 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.1s ease-out;
   font-weight: 600;
-  ${({ size }) => size && css`${theme.buttonSizes[size]}`}
-  ${({ variant }) => variant && css`${theme.buttonTypes[variant]}`}
+  ${({size}) => size && css`${theme.buttonSizes[size]}`}
+  ${({variant}) => variant && css`${theme.buttonTypes[variant]}`}
   
   :hover {
-    ${({ variant }) => variant && css`${theme.buttonTypes[variant].hover}`}
+    ${({variant}) => variant && css`${theme.buttonTypes[variant].hover}`}
   }
   
+  :disabled {
+    background: #9e9e9e;
+  }
+  :disabled:hover {
+    background: #9e9e9e;
+  }
 `;
 
 console.log(theme)

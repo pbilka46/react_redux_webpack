@@ -20,13 +20,13 @@ export const colors = {
 
 const theme = {
   font: {
-    size: "1rem",
-    family: "Helvetica",
-    weight: "normal"
+    size: '1rem',
+    family: 'Helvetica',
+    weight: 'normal',
   },
   color: {
-    default: "black",
-    button: "white"
+    default: 'black',
+    button: 'white',
   },
 };
 
@@ -38,7 +38,7 @@ theme.buttonTypes = {
       &:hover {
         background: ${colors.LIGHT_BLUE};
       }
-    `
+    `,
   },
   secondary: {
     color: '#FFF',
@@ -47,7 +47,7 @@ theme.buttonTypes = {
       &:hover {
         background: ${colors.LIGHT_BLUE};
       }
-    `
+    `,
   },
 };
 
@@ -65,6 +65,8 @@ theme.buttonSizes = {
     padding: '0.275rem 1.275rem',
   },
 };
+
+console.log(theme);
 
 
 export default theme;

@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import TextField from '@material-ui/core/TextField';
-
 import { colors } from 'theme';
 
 import Input from '../../atoms/Input'
@@ -29,7 +27,6 @@ const FormField = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
-  const [focus, setFocus] = useState(false);
   const hasError = touched[field.name] && errors[field.name];
   
   return (

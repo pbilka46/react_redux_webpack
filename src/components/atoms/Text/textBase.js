@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import theme from 'theme';
-
+console.log("theme", theme)
 export const textBase = css`
   font-family: ${props => props.theme.font.family};
   font-size: ${props => props.theme.font.size};

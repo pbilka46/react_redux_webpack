@@ -11,8 +11,22 @@ const configureStore = composeEnhancers(applyMiddleware(...middleware))(createSt
 const config = {
   key: 'root',
   storage,
-  whitelist: []
+  whitelist: ['account'],
 };
+
+const createMySocketMiddleware = url => (storeAPI) => {
+  const socket = createMyWebsocket(url);
+
+
+  return next => (action) => {
+    if (action.type == 'SEND_WEBSOCKET_MESSAGE') {
+      return;
+    }
+
+    return next(action);
+  };
+};
+
 
 const combinedReducer = persistReducer(config, reducer);
 const createAppStore = () => {
