@@ -26,12 +26,18 @@ export const fillList = (state, action) => {
 
 const addElement = (state, action) =>  {
 
-}
+};
 
 const createList = (name, optionalInitialState) => createReducer(
   optionalInitialState || initialState,
   {
-    [`${name}_LIST`]: fillList,
+    /*
+      Fill/replace list elements
+     */
+    [`${name}_LIST_FILL`]: fillList,
+    /*
+      Add element at the end of the list
+     */
     [`${name}_LIST_ADD`]: addElement
   }
 );

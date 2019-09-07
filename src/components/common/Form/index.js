@@ -26,20 +26,15 @@ const FormComponent = (props) => {
   };
   
   return (
-    <ViewWrapper>
-      <Heading
-        tag="h1"
-      >{props.title}</Heading>
-      <Formik
-        initialValues={props.initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={props.validationSchema}
-      >
-        <Form autoComplete="off">
-          {props.children}
-        </Form>
-      </Formik>
-    </ViewWrapper>
+    <Formik
+      initialValues={props.initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={props.validationSchema}
+    >
+      <Form autoComplete="off">
+        {props.children}
+      </Form>
+    </Formik>
   )
 };
 

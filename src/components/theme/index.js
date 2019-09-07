@@ -1,5 +1,5 @@
 export const GRAY = '#555b6e';
-export const ERROR = '#c14040';
+export const LIGHT_RED = '#c13043';
 export const GREEN = '#89b0ae';
 export const LIGHT_GREEN = '#bee3db';
 export const CREAM = '#faf9f9';
@@ -21,7 +21,7 @@ export const colors = {
 const theme = {
   font: {
     size: '1rem',
-    family: 'Helvetica',
+    family: 'Lexend Deca',
     weight: 'normal',
   },
   color: {

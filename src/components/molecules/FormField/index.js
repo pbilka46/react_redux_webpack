@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { colors } from 'theme';
 
-import Input from '../../atoms/Input'
-import Label from '../../atoms/Text/Label'
-import Placeholder from '../../atoms/Text/Placeholder'
+import Input from '../../atoms/Input';
+import Label from '../../atoms/Text/Label';
+import Placeholder from '../../atoms/Text/Placeholder';
 
 const Wrapper = styled.div`
   position: relative;
@@ -28,7 +28,7 @@ const FormField = ({
   ...props
 }) => {
   const hasError = touched[field.name] && errors[field.name];
-  
+
   return (
     <Wrapper>
       <InputPlaceholder color={hasError ? colors.ERROR : colors.GRAY}>{props.ariaLabel}</InputPlaceholder>

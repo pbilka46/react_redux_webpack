@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import theme from 'theme';
 console.log("theme", theme)
 export const textBase = css`
-  font-family: ${props => props.theme.font.family};
   font-size: ${props => props.theme.font.size};
   font-weight: ${props => props.theme.font.weight};
   color: ${props => props.theme.color.default};

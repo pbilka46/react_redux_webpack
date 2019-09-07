@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
-import { loginAction } from '../../../actions';
+import { createGroupAction } from '../../../actions';
 
 import Button from '../../atoms/Button';
 import FormField from '../../molecules/FormField';
@@ -13,52 +13,44 @@ import FormField from '../../molecules/FormField';
 import FormBase from '../../common/Form';
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Niepoprawny email')
+  name: Yup.string()
     .required('Wymagane'),
-  password: Yup.string()
-    .min(5, "Minimum 5 znaków")
-    .required("Wymagane")
 });
 
 
-const LoginForm = (props) => {
+const CreateGroupForm = (props) => {
   const [message, setMessage] = useState('');
   
   const handleLogin = (values) => {
-    props.loginAction(values).then(
-      () => props.history.push('/chat'),
-      () => setMessage('Wrong credentials.')
-    )
+    props.createGroupAction(values);
   };
   
   return (
     <FormBase
-      title="Zaloguj się"
       action={handleLogin}
       validationSchema={validationSchema}
       initialValues={{
-        email: 'patryk.bilka@gmail.com',
-        password: '123qwe'
+        name: 'nazwa',
+        description: 'Opis'
       }}
     >
       <p>{message}</p>
-      <Field name="email" ariaLabel="E-mail" component={FormField} />
-      <Field type="password" name="password" ariaLabel="Hasło" component={FormField} />
-      <Button type="submit">Zaloguj</Button>
+      <Field name="name" ariaLabel="Nazwa grupy" component={FormField} />
+      <Field name="description" ariaLabel="Opis grupy" component={FormField} />
+      <Button type="submit">Stwórz</Button>
     </FormBase>
   )
 };
 
-LoginForm.defaultProps = {
+CreateGroupForm.defaultProps = {
 
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    loginAction
+    createGroupAction
   }, dispatch);
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(LoginForm));
+export default withRouter(connect(null, mapDispatchToProps)(CreateGroupForm));
 

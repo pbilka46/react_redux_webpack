@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getGroups, sendMessage } from '../../../actions';
+import { getUserGroups, getRecentMessages, sendMessage } from '../../../actions';
 import {getSelectedGroup} from '../../../reducers';
 
-import ViewWrapper from '../../common/ViewWrapper/ViewWrapper';
 import Groups from '../../containers/Groups';
 import Messages from '../../containers/Messages';
 
@@ -17,35 +16,41 @@ const Wrapper = styled.div`
   min-height: 100%;
   > div:first-child {
     width: 280px;
+    
+    @media (min-width: 768px) {
+      
+    }
   }
 `;
 
-const Group = (props) => {
-  
+const Chat = ({ getGroups, sendMessage, getRecentMessages, selectedGroup }) => {
   useEffect(() => {
-    props.getGroups();
+    getGroups();
+    if (selectedGroup) {
+      getRecentMessages();
+    }
   });
-  
   return (
     <Wrapper>
-      <Groups />
-      <Messages sendMessage={props.sendMessage} selected={props.selected} />
+      <Groups selectedGroup={selectedGroup} />
+      <Messages selectedGroup={selectedGroup} sendMessage={sendMessage} selected={selectedGroup} />
     </Wrapper>
   )
 };
 
 const mapStateToProps = (state) => {
   return {
-    selected: getSelectedGroup(state.messages)
+    selectedGroup: getSelectedGroup(state.window)
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getGroups,
-    sendMessage
+    getGroups: getUserGroups,
+    sendMessage,
+    getRecentMessages
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Group);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
 

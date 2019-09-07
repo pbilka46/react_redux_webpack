@@ -1,16 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSelectedGroup, getMessagesByGroupId } from '../../../reducers';
-import { subscribeGroup, unSubscribeGroup } from '../../../actions';
+import { getMessages } from '../../../reducers';
 import Messages from '../../organisms/Messages';
 
-const mapStateToProps = (state) => {
-  const selected = getSelectedGroup(state.messages);
-
-  console.log(state)
+const mapStateToProps = (state, ownProps) => {
   
   return {
-    messages: getMessagesByGroupId(state.messages, selected),
+    messages: getMessages(state.chat, ownProps.selectedGroup),
   };
 };
 

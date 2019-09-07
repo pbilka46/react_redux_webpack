@@ -16,16 +16,22 @@ const addMessage = (state, action) => {
   };
 };
 
-const select = (state, action) => ({
-  ...state,
-  selected: action.payload.id,
-});
+const addMessages = (state, action) => {
+  const { group_id, messages } = action.payload;
+  const array = has(state, group_id) ? state[group_id] : [];
+  const nextMessages = array.concat(messages);
+  
+  return {
+    ...state,
+    [group_id]: [...nextMessages],
+  };
+};
 
 const createMessages = () => createReducer(
   { selected: null },
   {
+    [types.ADD_MESSAGES]: addMessages,
     [types.ADD_MESSAGE]: addMessage,
-    [types.SELECT]: select,
   },
 );
 

@@ -2,12 +2,6 @@ import theme from 'theme';
 
 import styled, { css } from 'styled-components';
 
-const buttonTypes = {
-  primary: 'primary',
-  secondary: 'secondary',
-};
-
-
 const Button = styled.button`
   background: white;
   border-radius: 6px;
@@ -16,11 +10,11 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.1s ease-out;
   font-weight: 600;
-  ${({size}) => size && css`${theme.buttonSizes[size]}`}
-  ${({variant}) => variant && css`${theme.buttonTypes[variant]}`}
+  ${({ size }) => size && css`${theme.buttonSizes[size]}`}
+  ${({ variant }) => variant && css`${theme.buttonTypes[variant]}`}
   
   :hover {
-    ${({variant}) => variant && css`${theme.buttonTypes[variant].hover}`}
+    ${({ variant }) => variant && css`${theme.buttonTypes[variant].hover}`}
   }
   
   :disabled {
@@ -30,8 +24,6 @@ const Button = styled.button`
     background: #9e9e9e;
   }
 `;
-
-console.log(theme)
 
 
 Button.defaultProps = {

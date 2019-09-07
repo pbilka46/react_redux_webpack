@@ -18,7 +18,6 @@ const Input = styled.input`
   font-size: 16px;
   padding: 18.5px 5px;
   text-indent: 10px;
-  border: 1px solid;
   border-radius:4px;
   transition: background-color 0.1s ease-out;
   font-weight: 400;

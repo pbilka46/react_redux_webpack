@@ -1,12 +1,17 @@
 import React, { useState} from 'react';
 import styled from 'styled-components';
 
-import TextArea from '../../atoms/TextArea';
+import TextAreaComponent from '../../atoms/TextArea';
 import Button from '../../atoms/Button';
 
-const Wrapper = styled.div`
+const TextArea = styled(TextAreaComponent)`
+  border: none;
+`;
+
+const Wrapper = styled.form`
   display: flex;
   flex-direction: row;
+  box-shadow: 1px 1px 21px 0px rgba(0,0,0,0.75);
 `;
 
 const MessageField = ({ submitText, sendMessage }) => {
@@ -15,15 +20,16 @@ const MessageField = ({ submitText, sendMessage }) => {
     setMessage(e.target.value);
   };
   
-  const handleSend = () => {
+  const handleSend = (e) => {
+    e.preventDefault();
     sendMessage(message);
     setMessage('')
   };
   
   return (
-    <Wrapper>
+    <Wrapper onSubmit={handleSend}>
       <TextArea value={message} onChange={handleMessageChange} />
-      <Button disabled={message === ''} onClick={handleSend}>{submitText}</Button>
+      <Button style={{ display: 'block'}} type="submit" disabled={message === ''}>{submitText}</Button>
     </Wrapper>
   )
 };
