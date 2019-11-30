@@ -25,6 +25,9 @@ const Heading = withDynamicTag(H1);
 
 Heading.propTypes = textProps;
 
-Heading.defaultProps = textDefaults;
+Heading.defaultProps = {
+  ...textDefaults,
+  tag: 'h1'
+};
 
 export default Heading;

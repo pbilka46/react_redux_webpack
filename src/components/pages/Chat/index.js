@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUserGroups, getRecentMessages, sendMessage } from '../../../actions';
+import { connectChat, getUserGroups, getRecentMessages, sendMessage } from '../../../actions';
 import {getSelectedGroup} from '../../../reducers';
 
 import Groups from '../../containers/Groups';
@@ -23,13 +23,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const Chat = ({ getGroups, sendMessage, getRecentMessages, selectedGroup }) => {
+const Chat = ({ connectChat, sendMessage, getRecentMessages, selectedGroup }) => {
   useEffect(() => {
-    getGroups();
-    if (selectedGroup) {
-      getRecentMessages();
-    }
-  });
+    connectChat();
+  }, []);
   return (
     <Wrapper>
       <Groups selectedGroup={selectedGroup} />
@@ -48,6 +45,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getGroups: getUserGroups,
     sendMessage,
+    connectChat,
     getRecentMessages
   }, dispatch);
 };

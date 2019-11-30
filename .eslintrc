@@ -13,6 +13,7 @@
     "mocha": true
   },
   "rules": {
+//    "import/no-unresolved": "off",
     "template-curly-spacing" : "off",
     "camelcase": "off",
     "indent" : "off",

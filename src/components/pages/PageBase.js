@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Heading from '../atoms/Text/Heading';
+import { PageHeader } from '../molecules/PageHeader';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,16 +12,14 @@ const Wrapper = styled.div`
   min-height: 100%;
 `;
 
-const PageBase = ({ onMountAction, title, children }) => {
-  
+const PageBase = ({ onMountAction, header, children }) => {
   useEffect(() => {
     onMountAction();
   }, []);
-  
+
   return (
     <Wrapper>
-      
-      <Heading tag="h1">{title}</Heading>
+      <PageHeader>{header}</PageHeader>
       {children}
     </Wrapper>
   );
@@ -29,8 +27,12 @@ const PageBase = ({ onMountAction, title, children }) => {
 
 PageBase.propTypes = {
   onMountAction: PropTypes.func,
-  title: PropTypes.string,
-}
+  header: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]),
+  children: PropTypes.func,
+};
 
 PageBase.defaultProps = {
   onMountAction: () => {},

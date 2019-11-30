@@ -31,7 +31,7 @@ const renderMessage = (id, message, styles) => {
 };
 
 
-const Messages = ({ messages, sendMessage, selected }) => {
+const Messages = ({ messages, sendMessage, selected, getRecentMessages }) => {
   return (
     <Wrapper>
       <List

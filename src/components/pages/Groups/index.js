@@ -1,39 +1,50 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getGroups } from '../../../actions';
-import {getAllEntities, getSelectedGroup} from '../../../reducers';
+import { getAllEntities, getSelectedGroup } from '../../../reducers';
 
+import Button from '../../atoms/Button';
+import Heading from '../../atoms/Text/Heading';
 import PageBase from '../PageBase';
-const Groups = (props) => {
-  const getGroups = () => {
-    props.getGroups();
+
+const redirect = (path) => (history) => {
+  history.push(path);
+};
+
+const GroupsPage = ({ dispatch, groups, history }) => {
+  const fetch = () => {
+    dispatch(getGroups());
   };
+
+  const handleClick = path => () => redirect(path)(history);
 
   return (
     <PageBase
-      title="Discover groups"
-      onMountAction={getGroups}
+      header={(
+        <>
+          <Heading>Odkrywaj grupy zainteresowań</Heading>
+          <Button onClick={handleClick('/groups/create')}>Stwórz nową</Button>
+        </>
+      )}
+      onMountAction={fetch}
     >
-      
       {
-        props.groups.map(group => (<p>{group.name}</p>))
+        groups.map(group => (<p>{group.name}</p>))
       }
     </PageBase>
-  )
+  );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    groups: getAllEntities(state.groups)
-  }
+GroupsPage.propTypes = {
+  groups: PropTypes.array,
+  history: PropTypes.object,
+  dispatch: PropTypes.func
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getGroups
-  }, dispatch);
-};
+const mapStateToProps = state => ({
+  groups: getAllEntities(state.groups)
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Groups);
-
+export default connect(mapStateToProps)(GroupsPage);

@@ -24,11 +24,12 @@ const Group = ({
   select, unSubscribe, subscribeGroup, group, selected
 }) => {
   useEffect(() => {
-    subscribeGroup(group);
+    // subscribeGroup(group);
+    // console.log('eff')
 
-    return function cleanup() {
-      unSubscribe(group);
-    };
+    // return function cleanup() {
+    //   unSubscribe(group);
+    // };
   });
 
   const handleClick = () => {

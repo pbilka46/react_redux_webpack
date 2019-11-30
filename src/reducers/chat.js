@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import has from 'lodash/has'
+import has from 'lodash/has';
 
 import * as types from '../constants/actionTypes';
 
@@ -8,20 +8,31 @@ function addMessage(state, action) {
   const { groupId, message } = payload;
 
   // Look up the correct post, to simplify the rest of the code
-  return updateGroupMessages(state, groupId, message.id);
+  return updateGroupMessage(state, groupId, message.id);
 }
 
 function addMultipleMessages(state, action) {
   const { payload } = action;
   const { groupId, allIds: messages } = payload;
-  
+
   // Look up the correct post, to simplify the rest of the code
   return updateGroupMessages(state, groupId, messages);
 }
 
 const updateGroupMessages = (state, groupId, payload) => {
   const group = has(state, groupId) ? state[groupId] : {};
-  console.log(group)
+  return {
+    ...state,
+    // Update our Post object with a new "messages" array
+    [groupId]: {
+      ...group,
+      messages: payload
+    }
+  };
+};
+
+const updateGroupMessage = (state, groupId, payload) => {
+  const group = has(state, groupId) ? state[groupId] : {};
   return {
     ...state,
     // Update our Post object with a new "messages" array
@@ -35,7 +46,7 @@ const updateGroupMessages = (state, groupId, payload) => {
 export const fillList = (state, action) => {
   const { payload } = action;
   const { count, byId, allIds } = payload;
-  
+
   return {
     ...byId,
   };
@@ -79,7 +90,7 @@ const groupsReducer = combineReducers({
 export const fillMessages = (state, action) => {
   const { payload } = action;
   const { count, byId, allIds } = payload;
-  
+
   return {
     ...byId,
   };
@@ -90,7 +101,7 @@ function addMessageEntry(state, action) {
   const { message } = payload;
 
   // Create our new Message object
-  
+
 
   // Insert the new Message object into the updated lookup table
   return {
@@ -146,16 +157,16 @@ export default combineReducers({
 });
 
 export const getMessages = (state, selected) => {
-  
   if (state.groups.allIds.includes(selected)) return [];
-  
+
   const group = state.groups.byId[selected];
-  
+  const messages = [];
+
   if (has(group, 'messages')) {
-    return group.messages.map((id) => {
-      return state.messages.byId[id]
-    })
+    group.messages.map((id) => {
+      if (has(state.messages.byId, id)) messages.push(state.messages.byId[id]);
+    });
   }
-  
-  return []
+
+  return messages;
 };
