@@ -20,11 +20,13 @@ const validationSchema = Yup.object().shape({
 
 const CreateGroupForm = (props) => {
   const [message, setMessage] = useState('');
-  
+
   const handleLogin = (values) => {
-    props.createGroupAction(values);
+    props.createGroupAction(values).then(
+      () => props.history.push('/chat'),
+    );
   };
-  
+
   return (
     <FormBase
       action={handleLogin}
@@ -39,18 +41,15 @@ const CreateGroupForm = (props) => {
       <Field name="description" ariaLabel="Opis grupy" component={FormField} />
       <Button type="submit">Stwórz</Button>
     </FormBase>
-  )
+  );
 };
 
 CreateGroupForm.defaultProps = {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
     createGroupAction
   }, dispatch);
-};
 
 export default withRouter(connect(null, mapDispatchToProps)(CreateGroupForm));
-

@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-const App = () =>  (
+const App = () => (
   <Wrapper>
     <Router>
       <React.Fragment>

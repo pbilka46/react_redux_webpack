@@ -74,21 +74,6 @@ const setGroupsList = payload => ({
     payload
   });
 
-export const attachIds = results => results
-  .map((result, index) => ({ ...result, entityId: index }));
-
-const setList = makeActionCreator(
-  createNamedType('ADD', 'GROUPS'),
-  'payload',
-);
-
-
-const createList = (results) => {
-  const arr = attachIds(results);
-
-  return getNormalizedListShape(arr);
-};
-
 const createMessage = (message, userId) => ({
   ...message,
   belongs_to_user: userId === message.user_id
@@ -229,12 +214,10 @@ export const subscribeGroup = group => (dispatch, getState) => {
     });
 };
 
-
-export const unSubscribeGroup = groupId => (dispatch, getState) => {
+export const unSubscribeGroup = groupId => (dispatch) => {
   dispatch({ type: `UNSUB_${groupId}` });
   window.Echo.leave(`laravel_database_group.${groupId}`);
 };
-
 
 export const selectGroup = nextGroup => (dispatch, getState) => {
   const selectedGroupId = getSelectedGroup(getState().window);

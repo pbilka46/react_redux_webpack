@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getGroups } from '../../../actions';
-import { getAllEntities, getSelectedGroup } from '../../../reducers';
+import { getAllEntities } from '../../../reducers';
 
 import Button from '../../atoms/Button';
 import Heading from '../../atoms/Text/Heading';
@@ -14,7 +13,7 @@ const redirect = (path) => (history) => {
 };
 
 const GroupsPage = ({ dispatch, groups, history }) => {
-  const fetch = () => {
+  const fetchGroups = () => {
     dispatch(getGroups());
   };
 
@@ -24,15 +23,13 @@ const GroupsPage = ({ dispatch, groups, history }) => {
     <PageBase
       header={(
         <>
-          <Heading>Odkrywaj grupy zainteresowań</Heading>
-          <Button onClick={handleClick('/groups/create')}>Stwórz nową</Button>
+          <Heading>Discover interest groups</Heading>
+          <Button onClick={handleClick('/groups/create')}>New group</Button>
         </>
       )}
-      onMountAction={fetch}
+      onMountAction={fetchGroups}
     >
-      {
-        groups.map(group => (<p>{group.name}</p>))
-      }
+      {groups.map((group, index) => (<p key={index}>{group.name}</p>))}
     </PageBase>
   );
 };
