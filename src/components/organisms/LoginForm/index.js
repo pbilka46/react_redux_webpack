@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Formik, Field, Form } from "formik";
+import { Field } from "formik";
 import * as Yup from "yup";
 
 import { loginAction } from '../../../actions';
@@ -21,17 +21,16 @@ const validationSchema = Yup.object().shape({
     .required("Wymagane")
 });
 
-
 const LoginForm = (props) => {
   const [message, setMessage] = useState('');
-  
+
   const handleLogin = (values) => {
     props.loginAction(values).then(
       () => props.history.push('/chat'),
       () => setMessage('Wrong credentials.')
-    )
+    );
   };
-  
+
   return (
     <FormBase
       title="Zaloguj się"
@@ -47,18 +46,15 @@ const LoginForm = (props) => {
       <Field type="password" name="password" ariaLabel="Hasło" component={FormField} />
       <Button type="submit">Zaloguj</Button>
     </FormBase>
-  )
+  );
 };
 
 LoginForm.defaultProps = {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
     loginAction
   }, dispatch);
-};
 
 export default withRouter(connect(null, mapDispatchToProps)(LoginForm));
-

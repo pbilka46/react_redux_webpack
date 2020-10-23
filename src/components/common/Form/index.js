@@ -6,10 +6,6 @@ import * as Yup from "yup";
 
 import { loginAction } from '../../../actions';
 
-import Heading from '../../atoms/Text/Heading';
-
-import ViewWrapper from '../../common/ViewWrapper/ViewWrapper';
-
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email('Niepoprawny email')

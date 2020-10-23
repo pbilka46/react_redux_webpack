@@ -66,7 +66,4 @@ theme.buttonSizes = {
   },
 };
 
-console.log(theme);
-
-
 export default theme;

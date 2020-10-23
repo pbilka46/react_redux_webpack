@@ -6,4 +6,3 @@ export const SET_MESSAGES = 'SET_MESSAGES';
 export const GROUPS = 'GROUPS';
 
 export const ADD_GROUPS = 'ADD_GROUPS';
-

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -32,8 +32,8 @@ const styles = {
 
 
 const renderRoute = (routes, onClick) => routes.map(route => (
-  <MenuItem onClick={onClick(route.key)}>{route.title}</MenuItem>
-  ));
+  <MenuItem key={route.key} onClick={onClick(route.key)}>{route.title}</MenuItem>
+));
 
 function ButtonAppBar(props) {
   const { classes } = props;
@@ -44,7 +44,6 @@ function ButtonAppBar(props) {
   }
 
   const onMenuClick = where => () => {
-    console.log(where);
     props.history.push(`/${where}`);
     setAnchorEl(null);
   };
@@ -104,9 +103,6 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             SpareShare
           </Typography>
-          <IconButton onClick={onLogoutClick} className={classes.menuButton} color="inherit" aria-label="Log out">
-            <MenuIcon />
-          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
@@ -116,6 +112,9 @@ function ButtonAppBar(props) {
 
 ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+logout: PropTypes.func,
+isAuth: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

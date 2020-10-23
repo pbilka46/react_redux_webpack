@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Formik, Field, Form } from "formik";
+import { Field } from "formik";
 import * as Yup from "yup";
+import isEmpty from 'lodash/isEmpty';
+import styled from 'styled-components';
 
 import { signupAction } from '../../../actions';
 
@@ -10,6 +13,10 @@ import Button from '../../atoms/Button';
 import FormField from '../../molecules/FormField';
 
 import FormBase from '../../common/Form';
+
+const Wrapper = styled.div`
+  margin-top: 2rem
+`;
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -26,41 +33,57 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
 });
 
-const LoginForm = (props) => {
+const renderErrors = data => (
+  Object.keys(data).map(errKey => data[errKey].map((err, index) => (<p key={index}>{err}</p>))));
+
+const SingUpForm = (props) => {
+  const [errors, setErrors] = useState([]);
   const handleLogin = (values) => {
-    props.signupAction(values);
+    props.signupAction(values).then(
+      () => props.history.push('/groups'),
+      (err) => {
+        if (err.response.status === 422) {
+          setErrors(err.response.data.errors);
+        }
+      }
+    );
   };
-  
+
   return (
-    <FormBase
-      title="Stwórz konto"
-      action={handleLogin}
-      validationSchema={validationSchema}
-      initialValues={{
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-      }}
-    >
-      <Field name="name" ariaLabel="Nazwa użytkownika" component={FormField} />
-      <Field name="email" ariaLabel="E-mail" component={FormField} />
-      <Field type="password" name="password" ariaLabel="Hasło" component={FormField} />
-      <Field type="password" name="password_confirmation" ariaLabel="Hasło, jeszcze raz" component={FormField} />
-      <Button type="submit">Stwórz konto</Button>
-    </FormBase>
-  )
+    <Wrapper>
+      <FormBase
+        title="Stwórz konto"
+        action={handleLogin}
+        validationSchema={validationSchema}
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+          password_confirmation: ''
+        }}
+      >
+        <Field name="name" ariaLabel="Nazwa użytkownika" component={FormField} />
+        <Field name="email" ariaLabel="E-mail" component={FormField} />
+        <Field type="password" name="password" ariaLabel="Hasło" component={FormField} />
+        <Field
+          type="password"
+          name="password_confirmation"
+          ariaLabel="Hasło, jeszcze raz"
+          component={FormField}
+        />
+        <Button type="submit">Stwórz konto</Button>
+        { !isEmpty(errors) && renderErrors(errors) }
+      </FormBase>
+    </Wrapper>
+  );
 };
 
-LoginForm.defaultProps = {
+SingUpForm.defaultProps = {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    signupAction
-  }, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators({
+  signupAction
+}, dispatch);
 
-export default connect(null, mapDispatchToProps)(LoginForm);
-
+export default withRouter(connect(null, mapDispatchToProps)(SingUpForm));

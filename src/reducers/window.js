@@ -1,19 +1,19 @@
+const initialState = {
+  selectedGroup: null,
+};
 
-
-
-const window = (state = { selectedGroup: null }, action) => {
-  switch(action.type) {
-    
+const window = (state = initialState, action) => {
+  switch (action.type) {
     case 'SELECT': {
       return {
         ...state,
         selectedGroup: action.payload
-      }
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export default window;
 

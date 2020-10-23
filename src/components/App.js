@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { library} from '@fortawesome/fontawesome-svg-core';
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import icons from '../assets/icons';
 import Navigation from './common/Navigation/Navigation';
@@ -17,29 +17,22 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  render() {
-    return (
-      <Wrapper>
-        <Router>
-          <React.Fragment>
-            <Navigation />
-            <Switch>
-              <Route path="/" exact component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/chat" component={Chat} />
-              <Route path="/groups" exact component={Groups} />
-              <Route path="/groups/create" component={GroupCreate} />
-            </Switch>
-          </React.Fragment>
-        </Router>
-      </Wrapper>
-    );
-  }
-}
+const App = () =>  (
+  <Wrapper>
+    <Router>
+      <React.Fragment>
+        <Navigation />
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/signin" exact component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/chat" component={Chat} />
+          <Route path="/groups" exact component={Groups} />
+          <Route path="/groups/create" component={GroupCreate} />
+        </Switch>
+      </React.Fragment>
+    </Router>
+  </Wrapper>
+);
 
 export default App;

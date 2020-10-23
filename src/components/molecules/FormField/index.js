@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { colors } from 'theme';
 
@@ -31,7 +31,9 @@ const FormField = ({
 
   return (
     <Wrapper>
-      <InputPlaceholder color={hasError ? colors.ERROR : colors.GRAY}>{props.ariaLabel}</InputPlaceholder>
+      <InputPlaceholder color={hasError ? colors.ERROR : colors.GRAY}>
+        {props.ariaLabel}
+      </InputPlaceholder>
       <Input error={hasError} {...field} {...props} />
       <Label color={colors.ERROR}>{ hasError && errors[field.name] }</Label>
     </Wrapper>

@@ -6,8 +6,8 @@ const fill = (state, action) => ({
   ...action.payload,
 });
 
-const createObject = name => createReducer({ isAuth: false }, {
+const createAccountObject = name => createReducer({ isAuth: false }, {
   [`${name}_FILL`]: fill,
 });
 
-export default createObject;
+export default createAccountObject;

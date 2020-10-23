@@ -12,9 +12,7 @@ const Wrapper = styled.div`
   color: #FFF;
 `;
 
-const GroupsList = ({
-                      groups, select, subscribeGroup, unSubscribeGroup, selectedGroup
-                    }) => (
+const GroupsList = ({ groups, select, subscribeGroup, unSubscribeGroup, selectedGroup }) => (
   <Wrapper>
     <Heading
       color="#FFF"

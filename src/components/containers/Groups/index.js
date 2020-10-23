@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { DiscoverGroupsList, ChatGroupsList } from '../../organisms/GroupsList';
+import { ChatGroupsList } from '../../organisms/GroupsList';
 import { getAllEntities } from '../../../reducers';
 import { subscribeGroup, unSubscribeGroup, selectGroup } from '../../../actions';
 

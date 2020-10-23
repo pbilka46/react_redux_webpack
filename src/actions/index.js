@@ -123,7 +123,6 @@ export const getGroups = () => (dispatch, getState) => {
     },
   }).then(
     (res) => {
-      console.log(setListFromArray(res.data));
       dispatch(setGroupsList(setListFromArray(res.data)));
     },
   );
