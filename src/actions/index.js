@@ -58,10 +58,6 @@ export const loginAction = data => (dispatch) => {
   );
 };
 
-const base = data => () => {
-
-};
-
 export const signupAction = data => (dispatch) => {
   const url = `${API_URL}/auth/signup/`;
 
