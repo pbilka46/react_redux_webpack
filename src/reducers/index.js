@@ -10,6 +10,7 @@ import windowReducer, * as fromWindow from './window';
 export default combineReducers({
   account: createAccountObject('user'),
   groups: createList(types.GROUPS),
+  friends: createList('FRIENDS'),
   chat,
   window: windowReducer
 });

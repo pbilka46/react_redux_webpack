@@ -60,7 +60,6 @@ const config = {
   whitelist: ['account'],
 };
 
-
 const combinedReducer = persistReducer(config, reducer);
 const createAppStore = () => {
   const store = configureStore(combinedReducer);

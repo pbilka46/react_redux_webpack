@@ -15,7 +15,11 @@ const Wrapper = styled.div`
 const PageBase = ({ onMountAction, header, children }) => {
   useEffect(() => {
     onMountAction();
-  }, []);
+    
+    //
+  }, [
+    //
+  ]);
 
   return (
     <Wrapper>
